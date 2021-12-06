@@ -988,5 +988,6 @@ public class Frame extends JFrame{
             return blackStonesOutOfGame.size();
         }
     }
+    //blalaalal
     
 }
