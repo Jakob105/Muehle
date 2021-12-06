@@ -988,7 +988,6 @@ public class Frame extends JFrame{
             return blackStonesOutOfGame.size();
         }
     }
-    public int randomMethod(){
-        return 1;
-    }
+    //blalaalal
+    
 }
