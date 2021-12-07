@@ -454,8 +454,6 @@ public class Frame extends JFrame{
                         thirdPhaseMove(field);
                     }
                 }
-                System.out.println(getAmountOfStonesOnBoard(playerColour));
-                System.out.println(getAmountOfStonesOnBoard(!playerColour));
             }
         });
     }
@@ -847,9 +845,6 @@ public class Frame extends JFrame{
     public void removeStone(Feld field){
         if (!field.isEmpty() && field.isColourOfStone() == playerColour){
             if (notAllStonesAreInMill()){
-                if(getAmountOfStonesOutOfGame(playerColour) > 5){
-                    System.out.println("Fuck");
-                }
                 if (!(stoneIsInMill(field))){
                     if (playerColour){
                         whiteStonesOnBoard.remove(field);
