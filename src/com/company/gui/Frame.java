@@ -14,8 +14,8 @@ public class Frame extends JFrame{
     private int amountOfUnusedWhiteStones;
     private int amountOfUnusedBlackStones;
     private boolean aMillWasCreatedInThePreviousAction;
-    private final List<Feld> whiteStonesOnBoard;
-    private final List<Feld> blackStonesOnBoard;
+    private List<Feld> whiteStonesOnBoard;
+    private List<Feld> blackStonesOnBoard;
     private List<Feld> whiteStonesOutOfGame;
     private List<Feld> blackStonesOutOfGame;
     private Feld[][] fields = new Feld[3][8];
@@ -84,8 +84,8 @@ public class Frame extends JFrame{
         aMillWasCreatedInThePreviousAction = false;
         stoneIsSelected = false;
         selectedStone = null;
-        whiteStonesOnBoard = new LinkedList<>();
-        blackStonesOnBoard = new LinkedList<>();
+        whiteStonesOnBoard = new ArrayList<>();
+        blackStonesOnBoard = new ArrayList<>();
         whiteStonesOutOfGame = new ArrayList<>();
         blackStonesOutOfGame = new ArrayList<>();
 
@@ -447,14 +447,15 @@ public class Frame extends JFrame{
                 } else {
                     if (getAmountOfUnusedStones(playerColour) > 0) {
                         firstPhaseMove(field);
-                    } else if (getAmountOfStonesOutOfGame(playerColour) < 6) {
+                    } else if (getAmountOfStonesOnBoard(playerColour) > 3) {
                         secondPhaseMove(field);
                     }
                     else {
                         thirdPhaseMove(field);
                     }
                 }
-
+                System.out.println(getAmountOfStonesOnBoard(playerColour));
+                System.out.println(getAmountOfStonesOnBoard(!playerColour));
             }
         });
     }
@@ -846,6 +847,9 @@ public class Frame extends JFrame{
     public void removeStone(Feld field){
         if (!field.isEmpty() && field.isColourOfStone() == playerColour){
             if (notAllStonesAreInMill()){
+                if(getAmountOfStonesOutOfGame(playerColour) > 5){
+                    System.out.println("Fuck");
+                }
                 if (!(stoneIsInMill(field))){
                     if (playerColour){
                         whiteStonesOnBoard.remove(field);
@@ -886,7 +890,7 @@ public class Frame extends JFrame{
             while (i < whiteStonesOnBoard.size() && stoneIsInMill(whiteStonesOnBoard.get(i))) {
                 i++;
             }
-            if (i == whiteStonesOnBoard.size()){
+            if (i >= whiteStonesOnBoard.size()){
                returnValue = false;
             }
         }
@@ -895,7 +899,7 @@ public class Frame extends JFrame{
             while (i < blackStonesOnBoard.size() && stoneIsInMill(blackStonesOnBoard.get(i))) {
                 i++;
             }
-            if (i == blackStonesOnBoard.size()){
+            if (i >= blackStonesOnBoard.size()){
                 returnValue = false;
             }
         }
