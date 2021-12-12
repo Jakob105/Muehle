@@ -1,5 +1,8 @@
 package com.company.gui;
 
+import com.company.Main;
+
+import javax.naming.Name;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -447,7 +450,7 @@ public class Frame extends JFrame{
                 } else {
                     if (getAmountOfUnusedStones(playerColour) > 0) {
                         firstPhaseMove(field);
-                    } else if (getAmountOfStonesOnBoard(playerColour) > 3) {
+                    } else if (getAmountOfStonesOutOfGame(playerColour) < 6) {
                         secondPhaseMove(field);
                     }
                     else {
